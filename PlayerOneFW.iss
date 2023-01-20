@@ -10,7 +10,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{9B420BF7-AC54-4243-9A8E-05BF5AC90F0F}
+AppId={{C5043E3C-27A5-4FE8-93EF-3AC8897F4535}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -18,14 +18,15 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={code:TSXInstallDir}\Resources\Common
+DefaultDirName={code:TSXInstallDir}
+
 DefaultGroupName={#MyAppName}
 
 ; Need to customise these
 ; First is where you want the installer to end up
 OutputDir=installer
 ; Next is the name of the installer
-OutputBaseFilename=PegasusIndigo_X2_Installer
+OutputBaseFilename=PlayerOneFW_X2_Installer
 ; Final one is the icon you would like on the installer. Comment out if not needed.
 SetupIconFile=rti_zone_logo.ico
 Compression=lzma
@@ -37,20 +38,28 @@ DisableDirPage=yes
 CloseApplications=yes
 DirExistsWarning=no
 
+
+
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Dirs]
-Name: "{app}\Plugins\FilterWheelPlugIns";
-Name: "{app}\Plugins64\FilterWheelPlugIns";
+Name: "{app}\Resources\Common\Plugins\FilterWheelPlugIns";
+Name: "{app}\Resources\Common\Plugins64\FilterWheelPlugIns";
 
 [Files]
-Source: "filterwheellist PegasusIndigo.txt";                                  DestDir: "{app}\Miscellaneous Files"; Flags: ignoreversion
-Source: "filterwheellist PegasusIndigo.txt";                                  DestDir: "{app}\Miscellaneous Files"; Flags: ignoreversion; DestName: "filterwheellist64 PegasusIndigo.txt"
+Source: "filterwheellist PlayerOneFW.txt";                      DestDir: "{app}\Resources\Common\Miscellaneous Files"; Flags: ignoreversion
+Source: "filterwheellist PlayerOneFW.txt";                      DestDir: "{app}\Resources\Common\Miscellaneous Files"; Flags: ignoreversion; DestName: "filterwheellist64 PlayerOneFW.txt"
 ; 32 bit
-Source: "libPegasusIndigo\Win32\Release\libPegasusIndigo.dll";    DestDir: "{app}\Plugins\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Plugins64\FilterWheelPlugIns'))
+Source: "libPlayerOneFW\Win32\Release\libPlayerOneFW.dll";      DestDir: "{app}\Resources\Common\Plugins\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
+Source: "PlayerOneFWSelect.ui";                                 DestDir: "{app}\Resources\Common\Plugins\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
+Source: "PlayerOneFW.ui";                                       DestDir: "{app}\Resources\Common\Plugins\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
+Source: "static_libs\Windows\Win32\PlayerOnePW.dll";             DestDir: "{app}"; Flags: ignoreversion;  Check: DirExists(ExpandConstant('{app}'))
 ; 64 bit
-Source: "libPegasusIndigo\x64\Release\libPegasusIndigo.dll";      DestDir: "{app}\Plugins64\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Plugins64\FilterWheelPlugIns'))
+Source: "libPlayerOneFW\x64\Release\libPlayerOneFW.dll";        DestDir: "{app}\Resources\Common\Plugins64\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
+Source: "PlayerOneFWSelect.ui";                                 DestDir: "{app}\\Resources\CommonPlugins64\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
+Source: "PlayerOneFW.ui";                                        DestDir: "{app}\Resources\Common\Plugins64\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
+Source: "static_libs\Windows\x64\PlayerOnePW.dll";                DestDir: "{app}\TheSky64"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\TheSky64'))
 
 
 [Code]

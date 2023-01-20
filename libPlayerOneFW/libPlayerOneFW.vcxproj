@@ -156,12 +156,12 @@
     <ClInclude Include="..\main.h" />
     <ClInclude Include="..\PlayerOneFW.h" />
     <ClInclude Include="..\PlayerOnePW.h" />
-    <ClInclude Include="..\x2camera.h" />
+    <ClInclude Include="..\x2filterwheel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\PlayerOneFW.cpp" />
-    <ClCompile Include="..\x2camera.cpp" />
+    <ClCompile Include="..\x2filterwheel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
