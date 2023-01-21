@@ -247,13 +247,6 @@ int X2FilterWheel::execModalSettingsDialog()
 
 void X2FilterWheel::uiEvent(X2GUIExchangeInterface* uiex, const char* pszEvent)
 {
-    int nErr = SB_OK;
-
-    if(!m_bLinked)
-        return;
-
-    if (!strcmp(pszEvent, "on_timer")) {
-    }
 }
 
 int X2FilterWheel::doPlayerOneFWFeatureConfig()
