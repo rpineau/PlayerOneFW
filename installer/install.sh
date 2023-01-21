@@ -36,6 +36,7 @@ cp "./filterwheellist PlayerOneFW.txt" "$TheSkyX_Path/Resources/Common/Miscellan
 cp "./libPlayerOneFW.so" "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/"
 cp "./PlayerOneFW.ui" "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/"
 cp "./PlayerOneFWSelect.ui" "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/"
+cp "./PlayerOne.png" "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/"
 sudo cp "./static_libs/`arch`/libPlayerOnePW.so.1.0.0" /usr/lib/
 sudo cp "./99-player_one_astronomy.rules" /etc/udev/rules.d/
 
@@ -45,5 +46,6 @@ if [ ! -z "$app_owner" ]; then
 	chown $app_owner "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/libPlayerOneFW.so"
 	chown $app_owner "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/PlayerOneFW.ui"
 	chown $app_owner "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/PlayerOneFWSelect.ui"
+	chown $app_owner "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/PlayerOne.png"
 fi
 chmod  755 "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/libPlayerOneFW.so"
