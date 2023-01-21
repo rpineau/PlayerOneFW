@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -fPIC -Wall -Wextra -O2 -g -DSB_LINUX_BUILD -I. -I./../../
 CPPFLAGS = -fPIC -Wall -Wextra -O2 -g -DSB_LINUX_BUILD -I. -I./../../
-LDFLAGS = -L`pwd`/static_libs/x86_64 -shared -lstdc++ -lPlayerOnePW
+LDFLAGS = -L`pwd`/static_libs/`arch` -shared -lstdc++ -lPlayerOnePW
 RM = rm -f
 STRIP = strip
 TARGET_LIB = libPlayerOneFW.so
