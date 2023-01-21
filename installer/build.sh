@@ -14,6 +14,7 @@ mkdir -p ROOT/tmp/PlayerOneFW_X2/
 cp "../filterwheellist PlayerOneFW.txt" ROOT/tmp/PlayerOneFW_X2/
 cp "../PlayerOneFW.ui" ROOT/tmp/PlayerOneFW_X2/
 cp "../PlayerOneFWSelect.ui" ROOT/tmp/PlayerOneFW_X2/
+cp "../PlayerOne.png" ROOT/tmp/PlayerOneFW_X2/
 cp "../build/Release/libPlayerOneFW.dylib" ROOT/tmp/PlayerOneFW_X2/
 cp "../static_libs/macOS/libPlayerOnePW.1.0.0.dylib" ROOT/tmp/PlayerOneFW_X2/
 

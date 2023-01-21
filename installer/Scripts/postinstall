@@ -44,6 +44,10 @@ rm -f "$PLUGINS_DIR/FilterWheelPlugIns/PlayerOneFW.ui"
 cp "/tmp/PlayerOneFW_X2/PlayerOneFW.ui" "$PLUGINS_DIR/FilterWheelPlugIns/"
 if [ "$?" -ne "0" ]; then exit 1; fi
 
+rm -f "$PLUGINS_DIR/FilterWheelPlugIns/PlayerOne.png"
+cp "/tmp/PlayerOneFW_X2/PlayerOne.png" "$PLUGINS_DIR/FilterWheelPlugIns/"
+if [ "$?" -ne "0" ]; then exit 1; fi
+
 
 rm -f "$PLUGINS_DIR/FilterWheelPlugIns/libPlayerOneFW.dylib"
 cp "/tmp/PlayerOneFW_X2/libPlayerOneFW.dylib" "$PLUGINS_DIR/FilterWheelPlugIns/"
@@ -60,6 +64,7 @@ if [ ! -z "$app_owner" ]; then
 	chown $app_owner "$PLUGINS_DIR/FilterWheelPlugIns/libPlayerOneFW.dylib"
 	chown $app_owner "$PLUGINS_DIR/FilterWheelPlugIns/PlayerOneFWSelect.ui"
 	chown $app_owner "$PLUGINS_DIR/FilterWheelPlugIns/PlayerOneFW.ui"
+	chown $app_owner "$PLUGINS_DIR/FilterWheelPlugIns/PlayerOne.png"
 	chown $app_owner "$TheSkyX_Path/Frameworks/libPlayerOnePW.1.0.0.dylib"
 fi
 

@@ -16,7 +16,7 @@ CPlayerOneFW::CPlayerOneFW()
     m_nFilterWheelCount = 0;
     m_sFWSerial.clear();
     m_sFirmwareVersion.clear();
-
+    m_bBidirectional = true;
 
 #ifdef PLUGIN_DEBUG
 #if defined(SB_WIN_BUILD)
@@ -56,7 +56,7 @@ int CPlayerOneFW::Connect(int nHandle)
     int nbTimeout = 0;
 #if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
     m_sLogFile << "["<<getTimeStamp()<<"]"<< " [Connect] Connect Called." << std::endl;
-    m_sLogFile << "["<<getTimeStamp()<<"]"<< " [Connect] Trying to connect WF " << nHandle<< std::endl;
+    m_sLogFile << "["<<getTimeStamp()<<"]"<< " [Connect] Trying to connect Filter Wheel with ID " << nHandle<< std::endl;
     m_sLogFile.flush();
 #endif
 
@@ -127,6 +127,17 @@ int CPlayerOneFW::Connect(int nHandle)
             POAClosePW(m_tFilterWheelProperties.Handle);
             return ERR_NORESPONSE;
         }
+    }
+
+    nErr = setWheelMoveDirection(m_bBidirectional);
+    if(nErr) {
+#if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
+        m_sLogFile << "["<<getTimeStamp()<<"]"<< " [Connect] Error setting wheel direction : " << nErr << std::endl;
+        m_sLogFile.flush();
+#endif
+
+        m_bIsConnected = false;
+        return ERR_DEVICENOTSUPPORTED;
     }
 
     nErr = getCurrentSlot(m_nCurentFilterSlot);
@@ -249,6 +260,10 @@ int CPlayerOneFW::isMoveToComplete(bool &bComplete)
     }
 
     if(pw_state == PW_STATE_MOVING) {
+#if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
+        m_sLogFile << "["<<getTimeStamp()<<"]"<< " [isMoveToComplete] bComplete : " << (bComplete?"Yes":"No") << std::endl;
+        m_sLogFile.flush();
+#endif
         return nErr;
     }
 
@@ -440,7 +455,72 @@ void CPlayerOneFW::setFilterWheelSerial(std::string sFilterWheelSerial)
     strncpy(m_tFilterWheelProperties.SN,sFilterWheelSerial.c_str(), 32);
 }
 
+
+int CPlayerOneFW::getWheelMoveDirection(bool &bBidirectional)
+{
+    int nErr = PLUGIN_OK;
+    PWErrors pwError;
+    int nIsOneWay;
+
+    pwError = POAGetOneWay(m_tFilterWheelProperties.Handle, &nIsOneWay);
+    if(pwError != PW_OK) {
+#if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
+        m_sLogFile << "["<<getTimeStamp()<<"]"<< " [getWheelMoveDirection] Error getting  wheel direction , Error = " << POAGetPWErrorString(pwError) << std::endl;
+        m_sLogFile.flush();
+#endif
+        return ERR_CMDFAILED;
+    }
+    if(!nIsOneWay)
+        bBidirectional = true;
+    else
+        bBidirectional = false;
+
+#if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
+    m_sLogFile << "["<<getTimeStamp()<<"]"<< " [getWheelMoveDirection] bBidirectional : " << (bBidirectional?"Yes":"No") << std::endl;
+    m_sLogFile.flush();
+#endif
+
+    return nErr;
+}
+
+int CPlayerOneFW::setWheelMoveDirection(bool bBidirectional)
+{
+    int nErr = PLUGIN_OK;
+    PWErrors pwError;
+
+    m_bBidirectional = bBidirectional;
+
+#if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
+    m_sLogFile << "["<<getTimeStamp()<<"]"<< " [setWheelMoveDirection] setting  wheel direction , Bidrectional = " << (m_bBidirectional?"Yes":"No") << std::endl;
+    m_sLogFile.flush();
+#endif
+
+    if(!m_bIsConnected)
+        return ERR_NOLINK;
+
+    pwError = POASetOneWay(m_tFilterWheelProperties.Handle, bBidirectional?0:1);
+    if(pwError != PW_OK) {
+#if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
+        m_sLogFile << "["<<getTimeStamp()<<"]"<< " [setWheelMoveDirection] Error setting  wheel direction , Error = " << POAGetPWErrorString(pwError) << std::endl;
+        m_sLogFile.flush();
+#endif
+        nErr = ERR_CMDFAILED;
+    }
+
+    return nErr;
+}
+
+
 #ifdef PLUGIN_DEBUG
+
+void CPlayerOneFW::log(const std::string sLogLine)
+{
+    m_sLogFile << "["<<getTimeStamp()<<"]"<< " [log] " << sLogLine << std::endl;
+    m_sLogFile.flush();
+
+}
+
+
 const std::string CPlayerOneFW::getTimeStamp()
 {
     time_t     now = time(0);

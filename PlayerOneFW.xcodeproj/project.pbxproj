@@ -67,10 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				9399209B296FB0C80039C8D3 /* PlayerOnePW.h */,
-				936B77011DC170C4008D84A8 /* main.cpp */,
 				936B77021DC170C4008D84A8 /* main.h */,
-				936B77031DC170C4008D84A8 /* x2filterwheel.cpp */,
+				936B77011DC170C4008D84A8 /* main.cpp */,
 				936B77041DC170C4008D84A8 /* x2filterwheel.h */,
+				936B77031DC170C4008D84A8 /* x2filterwheel.cpp */,
 				936B77091DC177DF008D84A8 /* PlayerOneFW.h */,
 				936B770A1DC17914008D84A8 /* PlayerOneFW.cpp */,
 			);

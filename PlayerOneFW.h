@@ -78,9 +78,18 @@ public:
 
     void            setFilterWheelHandle(int nFilterWheelHandle);
     void            setFilterWheelSerial(std::string sFilterWheelSerial);
+
+    int             getWheelMoveDirection(bool &bBidirectional);
+    int             setWheelMoveDirection(bool bBidirectional);
+
+#ifdef PLUGIN_DEBUG
+    void  log(const std::string sLogLine);
+#endif
+
 protected:
 
     bool            m_bIsConnected;
+    bool            m_bBidirectional;
     int             m_nFilterWheelCount;
     PWProperties    m_tFilterWheelProperties;
 

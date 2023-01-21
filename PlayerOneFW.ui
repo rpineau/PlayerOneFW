@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>320</width>
-    <height>554</height>
+    <height>284</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,19 +19,19 @@
   <property name="minimumSize">
    <size>
     <width>320</width>
-    <height>554</height>
+    <height>284</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>320</width>
-    <height>554</height>
+    <height>284</height>
    </size>
   </property>
   <property name="sizeIncrement">
    <size>
     <width>320</width>
-    <height>554</height>
+    <height>284</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -71,7 +71,7 @@
       <property name="geometry">
        <rect>
         <x>72</x>
-        <y>16</y>
+        <y>112</y>
         <width>133</width>
         <height>16</height>
        </rect>
@@ -86,8 +86,8 @@
      <widget class="QPushButton" name="pushButtonCancel">
       <property name="geometry">
        <rect>
-        <x>96</x>
-        <y>104</y>
+        <x>64</x>
+        <y>224</y>
         <width>81</width>
         <height>24</height>
        </rect>
@@ -99,8 +99,8 @@
      <widget class="QPushButton" name="pushButtonOK">
       <property name="geometry">
        <rect>
-        <x>184</x>
-        <y>104</y>
+        <x>152</x>
+        <y>224</y>
         <width>81</width>
         <height>24</height>
        </rect>
@@ -112,18 +112,66 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QCheckBox" name="checkBox">
+     <widget class="QLabel" name="label_logo">
       <property name="geometry">
        <rect>
-        <x>64</x>
-        <y>56</y>
-        <width>160</width>
-        <height>24</height>
+        <x>48</x>
+        <y>16</y>
+        <width>200</width>
+        <height>78</height>
        </rect>
       </property>
       <property name="text">
-       <string>Set to unidirectional</string>
+       <string/>
       </property>
+      <property name="pixmap">
+       <pixmap>../../cameraplugins/PlayerOne/PlayerOne.png</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="X2_PhotoFileName" stdset="0">
+       <string>PlayerOne.png</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>24</x>
+        <y>136</y>
+        <width>248</width>
+        <height>64</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Wheel move</string>
+      </property>
+      <widget class="QRadioButton" name="radioButton">
+       <property name="geometry">
+        <rect>
+         <x>8</x>
+         <y>32</y>
+         <width>99</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Bidirectional</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="geometry">
+        <rect>
+         <x>136</x>
+         <y>32</y>
+         <width>112</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Unidirectional</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </item>

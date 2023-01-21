@@ -30,8 +30,9 @@ class BasicIniUtilInterface;
 class TickCountInterface;
 
 
-#define PARENT_KEY			"PlayerOneFilterWheel"
-#define CHILD_KEY_SERIAL	"Serial"
+#define PARENT_KEY  "PlayerOneFilterWheel"
+#define WHEEL_SN    "WheelSerialNumber"
+#define WHEEL_DIR   "WheelDirection"
 
 
 #if defined(SB_WIN_BUILD)
@@ -148,5 +149,5 @@ private:
     bool                                m_bLinked;
     bool                                m_bMoving;
     int                                 m_nFilterWheelHandle;
-    char                                m_szFilterWheelSerial[128];
+    char                                m_szFilterWheelSerial[256];
 };

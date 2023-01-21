@@ -22,19 +22,30 @@ X2FilterWheel::X2FilterWheel(const char* pszDriverSelection,
 
 
     int  nErr = PLUGIN_OK;
-
+    int nDir;
+    m_bMoving = false;
     m_bLinked = false;
-    m_pIniUtil->readString(PARENT_KEY, CHILD_KEY_SERIAL, "0", m_szFilterWheelSerial, 128);
-    nErr = m_PlayerOneFW.getFilterWheelHandleFromSerial(m_nFilterWheelHandle, std::string(m_szFilterWheelSerial));
-    if(nErr) {
+
+    if (m_pIniUtil) {
+        m_pIniUtil->readString(PARENT_KEY, WHEEL_SN, "0", m_szFilterWheelSerial, 256);
+        nDir= m_pIniUtil->readInt(PARENT_KEY, WHEEL_DIR,1);
+
+        nErr = m_PlayerOneFW.getFilterWheelHandleFromSerial(m_nFilterWheelHandle, std::string(m_szFilterWheelSerial));
+        if(nErr) {
+            m_nFilterWheelHandle = 0;
+            m_PlayerOneFW.setFilterWheelHandle(-1);
+            return;
+        }
+        m_PlayerOneFW.setFilterWheelSerial(std::string(m_szFilterWheelSerial));
+        m_PlayerOneFW.setFilterWheelHandle(m_nFilterWheelHandle);
+        m_PlayerOneFW.setWheelMoveDirection(nDir?true:false);
+    }
+    else {
         m_nFilterWheelHandle = 0;
         m_PlayerOneFW.setFilterWheelHandle(-1);
-        return;
+
     }
-    m_PlayerOneFW.setFilterWheelSerial(std::string(m_szFilterWheelSerial));
-    m_PlayerOneFW.setFilterWheelHandle(m_nFilterWheelHandle);
-    m_bMoving = false;
-    
+
 }
 
 X2FilterWheel::~X2FilterWheel()
@@ -165,7 +176,6 @@ int X2FilterWheel::execModalSettingsDialog()
     std::stringstream sTmpBuf;
     std::string fName;
 
-
     if(m_bLinked) {
         nErr = doPlayerOneFWFeatureConfig();
         return nErr;
@@ -228,7 +238,7 @@ int X2FilterWheel::execModalSettingsDialog()
             m_PlayerOneFW.getFilterWheelSerialFromHandle(m_nFilterWheelHandle, sFilterWheelSerial);
             m_PlayerOneFW.setFilterWheelSerial(sFilterWheelSerial);
             // store filter wheelserial
-            m_pIniUtil->writeString(PARENT_KEY, CHILD_KEY_SERIAL, sFilterWheelSerial.c_str());
+            m_pIniUtil->writeString(PARENT_KEY, WHEEL_SN, sFilterWheelSerial.c_str());
         }
     }
     return nErr;
@@ -250,6 +260,7 @@ int X2FilterWheel::doPlayerOneFWFeatureConfig()
 {
     int nErr = SB_OK;
     bool bPressedOK = false;
+    bool bBidirectional = true; // default
 
     X2GUIExchangeInterface* dx = NULL;
     X2ModalUIUtil           uiutil(this, GetTheSkyXFacadeForDrivers());
@@ -266,6 +277,13 @@ int X2FilterWheel::doPlayerOneFWFeatureConfig()
 
 
     if(m_bLinked){
+        m_PlayerOneFW.getWheelMoveDirection(bBidirectional);
+        dx->setChecked("radioButton", bBidirectional?1:0);
+        dx->setChecked("radioButton_2", bBidirectional?0:1);
+    }
+    else {
+        dx->setEnabled("radioButton", false);
+        dx->setEnabled("radioButton_2", false);
     }
 
     m_nCurrentDialog = SETTINGS;
@@ -276,11 +294,12 @@ int X2FilterWheel::doPlayerOneFWFeatureConfig()
     //Retreive values from the user interface
     if (bPressedOK) {
         if(m_bLinked) {
-            // m_PlayerOneFW.setDirectionMode(...);
+            bBidirectional = dx->isChecked("radioButton")?true:false;
+            m_PlayerOneFW.setWheelMoveDirection(bBidirectional);
+            nErr |= m_pIniUtil->writeInt(PARENT_KEY, WHEEL_DIR, bBidirectional?1:0);
         }
 
         // save the values to persistent storage
-        //nErr |= m_pIniUtil->writeInt(PARENT_KEY, CHILD_KEY_HOME_ON_PARK, m_bHomeOnPark);
         //nErr |= m_pIniUtil->writeInt(PARENT_KEY, CHILD_KEY_HOME_ON_UNPARK, m_bHomeOnUnpark);
         //nErr |= m_pIniUtil->writeInt(PARENT_KEY, CHILD_KEY_LOG_RAIN_STATUS, m_bLogRainStatus);
 
@@ -298,6 +317,7 @@ int	X2FilterWheel::filterCount(int& nCount)
     if(nErr) {
         nErr = ERR_CMDFAILED;
     }
+
     return nErr;
 }
 
@@ -344,23 +364,23 @@ int	X2FilterWheel::defaultFilterName(const int& nIndex, BasicStringInterface& st
 int	X2FilterWheel::startFilterWheelMoveTo(const int& nTargetPosition)
 {
     int nErr = SB_OK;
-    
+
     if(m_bLinked) {
         X2MutexLocker ml(GetMutex());
         nErr = m_PlayerOneFW.moveToFilterIndex(nTargetPosition);
         if(nErr)
             nErr = ERR_CMDFAILED;
+        m_bMoving = true;
     }
-    m_bMoving = true;
     return nErr;
 }
 
 int	X2FilterWheel::isCompleteFilterWheelMoveTo(bool& bComplete) const
 {
     int nErr = SB_OK;
+    X2FilterWheel* pMe = (X2FilterWheel*)this;
 
     if(m_bLinked) {
-        X2FilterWheel* pMe = (X2FilterWheel*)this;
         X2MutexLocker ml(pMe->GetMutex());
         if(m_bMoving) {
             nErr = pMe->m_PlayerOneFW.isMoveToComplete(bComplete);
@@ -369,7 +389,11 @@ int	X2FilterWheel::isCompleteFilterWheelMoveTo(bool& bComplete) const
             if(bComplete)
                 pMe->m_bMoving =  false;
         }
+        else
+            bComplete = true;
     }
+    else
+        bComplete = true;
     return nErr;
 }
 
