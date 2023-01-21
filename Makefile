@@ -1,14 +1,14 @@
-# Makefile for libPegasusIndigo
+# Makefile for libPlayerOneFW
 
 CC = gcc
 CFLAGS = -fPIC -Wall -Wextra -O2 -g -DSB_LINUX_BUILD -I. -I./../../
 CPPFLAGS = -fPIC -Wall -Wextra -O2 -g -DSB_LINUX_BUILD -I. -I./../../
-LDFLAGS = -shared -lstdc++
+LDFLAGS = -L`pwd`/static_libs/x86_64 -shared -lstdc++ -lPlayerOnePW
 RM = rm -f
 STRIP = strip
-TARGET_LIB = libPegasusIndigo.so
+TARGET_LIB = libPlayerOneFW.so
 
-SRCS = main.cpp x2filterwheel.cpp PegasusIndigo.cpp
+SRCS = main.cpp x2filterwheel.cpp PlayerOneFW.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 .PHONY: all
@@ -16,6 +16,7 @@ all: ${TARGET_LIB}
 
 $(TARGET_LIB): $(OBJS)
 	$(CC) ${LDFLAGS} -o $@ $^
+	patchelf --add-needed  libPlayerOnePW.so.1.0.0 $@
 	$(STRIP) $@ >/dev/null 2>&1  || true
 
 $(SRCS:.cpp=.d):%.d:%.cpp
