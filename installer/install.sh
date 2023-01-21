@@ -37,6 +37,7 @@ cp "./libPlayerOneFW.so" "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWhee
 cp "./PlayerOneFW.ui" "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/"
 cp "./PlayerOneFWSelect.ui" "$TheSkyX_Path/Resources/Common/$PLUGINS_DIR/FilterWheelPlugIns/"
 sudo cp "./static_libs/x86_64/libPlayerOnePW.so.1.0.0" /usr/lib/
+sudo cp "./ 99-player_one_astronomy.rules" /etc/udev/rules.d/
 
 app_owner=`/usr/bin/stat -c "%u" "$TheSkyX_Path" | xargs id -n -u`
 if [ ! -z "$app_owner" ]; then
