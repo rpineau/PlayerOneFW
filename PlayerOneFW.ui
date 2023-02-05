@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>X2FilterWheel</class>
+ <widget class="QDialog" name="X2FilterWheel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>320</width>
+    <height>284</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>320</width>
+    <height>284</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>320</width>
+    <height>284</height>
+   </size>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>320</width>
+    <height>284</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Player One FW Settings</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="X2Form" name="X2Form">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1024</width>
+       <height>1024</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_RTI">
+      <property name="geometry">
+       <rect>
+        <x>72</x>
+        <y>112</y>
+        <width>133</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>© RTI-Zone.org, 2023</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonCancel">
+      <property name="geometry">
+       <rect>
+        <x>64</x>
+        <y>224</y>
+        <width>81</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonOK">
+      <property name="geometry">
+       <rect>
+        <x>152</x>
+        <y>224</y>
+        <width>81</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>OK</string>
+      </property>
+      <property name="default">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_logo">
+      <property name="geometry">
+       <rect>
+        <x>48</x>
+        <y>16</y>
+        <width>200</width>
+        <height>78</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../cameraplugins/PlayerOne/PlayerOne.png</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="X2_PhotoFileName" stdset="0">
+       <string>PlayerOne.png</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>24</x>
+        <y>136</y>
+        <width>248</width>
+        <height>64</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Wheel move</string>
+      </property>
+      <widget class="QRadioButton" name="radioButton">
+       <property name="geometry">
+        <rect>
+         <x>8</x>
+         <y>32</y>
+         <width>99</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Bidirectional</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="geometry">
+        <rect>
+         <x>136</x>
+         <y>32</y>
+         <width>112</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Unidirectional</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>X2Form</class>
+   <extends>QFrame</extends>
+   <header>x2form.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
