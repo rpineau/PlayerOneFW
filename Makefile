@@ -16,7 +16,7 @@ all: ${TARGET_LIB}
 
 $(TARGET_LIB): $(OBJS)
 	$(CC) ${LDFLAGS} -o $@ $^ static_libs/`arch`/libPlayerOnePW_Static.a
-	patchelf --add-needed libudev.so.1 PlayerOneFW.so
+	patchelf --add-needed libudev.so.1 libPlayerOneFW.so
 	$(STRIP) $@ >/dev/null 2>&1  || true
 
 $(SRCS:.cpp=.d):%.d:%.cpp
