@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -fPIC -Wall -Wextra -O2 -g -DSB_LINUX_BUILD -I. -I./../../
 CPPFLAGS = -fPIC -Wall -Wextra -O2 -g -DSB_LINUX_BUILD -I. -I./../../
-LDFLAGS = -L`pwd`/static_libs/`arch` -shared -lstdc++ -lPlayerOnePW
+LDFLAGS = -shared -lstdc++
 RM = rm -f
 STRIP = strip
 TARGET_LIB = libPlayerOneFW.so
@@ -15,8 +15,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: ${TARGET_LIB}
 
 $(TARGET_LIB): $(OBJS)
-	$(CC) ${LDFLAGS} -o $@ $^
-	patchelf --add-needed  libPlayerOnePW.so.1.0.0 $@
+	$(CC) ${LDFLAGS} -o $@ $^ static_libs/`arch`/libPlayerOnePW_Static.a
 	$(STRIP) $@ >/dev/null 2>&1  || true
 
 $(SRCS:.cpp=.d):%.d:%.cpp

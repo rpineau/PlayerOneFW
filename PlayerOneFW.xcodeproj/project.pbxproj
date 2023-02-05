@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93371E2429902F2300AB9FAB /* libPlayerOnePW_Static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93371E2329902F2300AB9FAB /* libPlayerOnePW_Static.a */; };
+		93371E282990300600AB9FAB /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93371E272990300600AB9FAB /* AppKit.framework */; };
 		936B76FE1DC16F99008D84A8 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936B76FD1DC16F99008D84A8 /* CoreFoundation.framework */; };
 		936B77001DC16FA0008D84A8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936B76FF1DC16FA0008D84A8 /* IOKit.framework */; };
 		936B77051DC170C4008D84A8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 936B77011DC170C4008D84A8 /* main.cpp */; };
@@ -15,10 +17,12 @@
 		936B77081DC170C4008D84A8 /* x2filterwheel.h in Headers */ = {isa = PBXBuildFile; fileRef = 936B77041DC170C4008D84A8 /* x2filterwheel.h */; };
 		936B770B1DC17914008D84A8 /* PlayerOneFW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 936B770A1DC17914008D84A8 /* PlayerOneFW.cpp */; };
 		9399209C296FB0C80039C8D3 /* PlayerOnePW.h in Headers */ = {isa = PBXBuildFile; fileRef = 9399209B296FB0C80039C8D3 /* PlayerOnePW.h */; };
-		9399209E2971135E0039C8D3 /* libPlayerOnePW.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9399209D2971135E0039C8D3 /* libPlayerOnePW.1.0.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93371E2329902F2300AB9FAB /* libPlayerOnePW_Static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPlayerOnePW_Static.a; path = static_libs/macOS/libPlayerOnePW_Static.a; sourceTree = "<group>"; };
+		93371E2529902F7700AB9FAB /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		93371E272990300600AB9FAB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		936B76F41DC16E03008D84A8 /* libPlayerOneFW.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libPlayerOneFW.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		936B76FD1DC16F99008D84A8 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		936B76FF1DC16FA0008D84A8 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -29,7 +33,6 @@
 		936B77091DC177DF008D84A8 /* PlayerOneFW.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerOneFW.h; sourceTree = "<group>"; };
 		936B770A1DC17914008D84A8 /* PlayerOneFW.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerOneFW.cpp; sourceTree = "<group>"; };
 		9399209B296FB0C80039C8D3 /* PlayerOnePW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOnePW.h; sourceTree = "<group>"; };
-		9399209D2971135E0039C8D3 /* libPlayerOnePW.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libPlayerOnePW.1.0.0.dylib; path = static_libs/macOS/libPlayerOnePW.1.0.0.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +40,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9399209E2971135E0039C8D3 /* libPlayerOnePW.1.0.0.dylib in Frameworks */,
+				93371E282990300600AB9FAB /* AppKit.framework in Frameworks */,
+				93371E2429902F2300AB9FAB /* libPlayerOnePW_Static.a in Frameworks */,
 				936B77001DC16FA0008D84A8 /* IOKit.framework in Frameworks */,
 				936B76FE1DC16F99008D84A8 /* CoreFoundation.framework in Frameworks */,
 			);
@@ -80,7 +84,9 @@
 		936B76FC1DC16F7C008D84A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9399209D2971135E0039C8D3 /* libPlayerOnePW.1.0.0.dylib */,
+				93371E272990300600AB9FAB /* AppKit.framework */,
+				93371E2529902F7700AB9FAB /* CoreServices.framework */,
+				93371E2329902F2300AB9FAB /* libPlayerOnePW_Static.a */,
 				936B76FF1DC16FA0008D84A8 /* IOKit.framework */,
 				936B76FD1DC16F99008D84A8 /* CoreFoundation.framework */,
 			);

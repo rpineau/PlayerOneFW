@@ -55,13 +55,11 @@ Source: "libPlayerOneFW\Win32\Release\libPlayerOneFW.dll";      DestDir: "{app}\
 Source: "PlayerOneFWSelect.ui";                                 DestDir: "{app}\Resources\Common\Plugins\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
 Source: "PlayerOneFW.ui";                                       DestDir: "{app}\Resources\Common\Plugins\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
 Source: "PlayerOne.png";                                        DestDir: "{app}\Resources\Common\Plugins\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
-Source: "static_libs\Windows\Win32\PlayerOnePW.dll";            DestDir: "{app}"; Flags: ignoreversion;  Check: DirExists(ExpandConstant('{app}'))
 ; 64 bit
 Source: "libPlayerOneFW\x64\Release\libPlayerOneFW.dll";        DestDir: "{app}\Resources\Common\Plugins64\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
 Source: "PlayerOneFWSelect.ui";                                 DestDir: "{app}\\Resources\CommonPlugins64\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
 Source: "PlayerOneFW.ui";                                       DestDir: "{app}\Resources\Common\Plugins64\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
 Source: "PlayerOne.png";                                        DestDir: "{app}\Resources\Common\Plugins64\FilterWheelPlugIns"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\Resources\Common\Plugins64\FilterWheelPlugIns'))
-Source: "static_libs\Windows\x64\PlayerOnePW.dll";              DestDir: "{app}\TheSky64"; Flags: ignoreversion; Check: DirExists(ExpandConstant('{app}\TheSky64'))
 
 
 [Code]
