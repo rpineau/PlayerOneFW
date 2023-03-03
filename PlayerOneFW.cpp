@@ -53,8 +53,9 @@ int CPlayerOneFW::Connect(int nHandle)
 {
     int nErr = PLUGIN_OK;
     PWErrors pwError;
-    bool bComplete = false;
     int nbTimeout = 0;
+    PWState pw_state = PW_STATE_CLOSED;
+
 #if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
     m_sLogFile << "["<<getTimeStamp()<<"]"<< " [Connect] Connect Called." << std::endl;
     m_sLogFile << "["<<getTimeStamp()<<"]"<< " [Connect] Trying to connect Filter Wheel with ID " << nHandle<< std::endl;
@@ -62,6 +63,7 @@ int CPlayerOneFW::Connect(int nHandle)
 #endif
 
     if(nHandle>=0 && m_sFWSerial.size()!=0) {
+        POAResetPW(nHandle);
         pwError = POAGetPWPropertiesByHandle(nHandle, &m_tFilterWheelProperties);
         if(pwError != PW_OK) {
 #if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
@@ -82,6 +84,7 @@ int CPlayerOneFW::Connect(int nHandle)
                 strncpy(m_tFilterWheelProperties.Name, tFilterWheelPropertiesList[0].Name, 64);
                 strncpy((char *)m_tFilterWheelProperties.SN, tFilterWheelPropertiesList[0].SN, 32);
                 m_sFWSerial.assign(tFilterWheelPropertiesList[0].SN);
+                POAResetPW(m_tFilterWheelProperties.Handle);
             }
             else
                 return ERR_NODEVICESELECTED;
@@ -118,9 +121,11 @@ int CPlayerOneFW::Connect(int nHandle)
         m_bIsConnected = false;
         return FIRMWARE_NOT_SUPPORTED;
     }
-    bComplete = false;
-    while(!bComplete) {
-        nErr = isMoveToComplete(bComplete);
+
+    while(true) {
+        pwError = POAGetPWState(m_tFilterWheelProperties.Handle, &pw_state);
+        if(pw_state != PW_STATE_MOVING)
+            break;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         std::this_thread::yield();
         nbTimeout++;
@@ -257,6 +262,11 @@ int CPlayerOneFW::isMoveToComplete(bool &bComplete)
         return ERR_CMDFAILED;
     }
 
+#if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
+    m_sLogFile << "["<<getTimeStamp()<<"]"<< " [isMoveToComplete] pw_state : " << pw_state << std::endl;
+    m_sLogFile.flush();
+#endif
+
     if(pw_state == PW_STATE_MOVING) {
 #if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
         m_sLogFile << "["<<getTimeStamp()<<"]"<< " [isMoveToComplete] bComplete : " << (bComplete?"Yes":"No") << std::endl;
@@ -273,6 +283,12 @@ int CPlayerOneFW::isMoveToComplete(bool &bComplete)
 #endif
         return ERR_CMDFAILED;
     }
+
+#if defined PLUGIN_DEBUG && PLUGIN_DEBUG >= 2
+    m_sLogFile << "["<<getTimeStamp()<<"]"<< " [isMoveToComplete] nFilterSlot         : " << nFilterSlot << std::endl;
+    m_sLogFile << "["<<getTimeStamp()<<"]"<< " [isMoveToComplete] m_nTargetFilterSlot : " << m_nTargetFilterSlot << std::endl;
+    m_sLogFile.flush();
+#endif
 
 
     if(nFilterSlot == m_nTargetFilterSlot) {
