@@ -40,7 +40,7 @@
 #include "PlayerOnePW.h"
 
 // #define PLUGIN_DEBUG 2
-#define PLUGIN_VERSION      1.0
+#define PLUGIN_VERSION      1.01
 
 
 #define SERIAL_BUFFER_SIZE 1024

@@ -45,7 +45,8 @@ CPlayerOneFW::CPlayerOneFW()
 
 CPlayerOneFW::~CPlayerOneFW()
 {
-
+    if(m_bIsConnected)
+        Disconnect();
 }
 
 int CPlayerOneFW::Connect(int nHandle)
@@ -194,9 +195,6 @@ int CPlayerOneFW::getFirmwareVersion(std::string &sVersion)
     m_sLogFile << "["<<getTimeStamp()<<"]"<< " [getFirmwareVersion] Called" << std::endl;
     m_sLogFile.flush();
 #endif
-
-    if(!m_bIsConnected)
-        return PLUGIN_NOT_CONNECTED;
 
     ssTmp << " API V" << POAGetPWAPIVer() << ", SDK "<<POAGetPWSDKVer();
 

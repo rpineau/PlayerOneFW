@@ -145,14 +145,10 @@ void X2FilterWheel::deviceInfoDetailedDescription(BasicStringInterface& str) con
 
 void X2FilterWheel::deviceInfoFirmwareVersion(BasicStringInterface& str)
 {
-    if(m_bLinked) {
         X2MutexLocker ml(GetMutex());
         std::string sFirmware;
         m_PlayerOneFW.getFirmwareVersion(sFirmware);
         str = sFirmware.c_str();
-    }
-    else
-        str = "N/A";
 }
 void X2FilterWheel::deviceInfoModel(BasicStringInterface& str)				
 {

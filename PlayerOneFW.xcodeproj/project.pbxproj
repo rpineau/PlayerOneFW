@@ -84,9 +84,9 @@
 		936B76FC1DC16F7C008D84A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93371E2329902F2300AB9FAB /* libPlayerOnePW_Static.a */,
 				93371E272990300600AB9FAB /* AppKit.framework */,
 				93371E2529902F7700AB9FAB /* CoreServices.framework */,
-				93371E2329902F2300AB9FAB /* libPlayerOnePW_Static.a */,
 				936B76FF1DC16FA0008D84A8 /* IOKit.framework */,
 				936B76FD1DC16F99008D84A8 /* CoreFoundation.framework */,
 			);
