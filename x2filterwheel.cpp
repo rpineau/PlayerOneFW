@@ -20,7 +20,6 @@ X2FilterWheel::X2FilterWheel(const char* pszDriverSelection,
     m_pIOMutex                        = pIOMutex;
     m_pTickCount                    = pTickCount;
 
-
     int  nErr = PLUGIN_OK;
     int nDir;
     m_bMoving = false;
@@ -43,7 +42,6 @@ X2FilterWheel::X2FilterWheel(const char* pszDriverSelection,
     else {
         m_nFilterWheelHandle = 0;
         m_PlayerOneFW.setFilterWheelHandle(-1);
-
     }
 
 }
@@ -264,7 +262,6 @@ int X2FilterWheel::doPlayerOneFWFeatureConfig()
     if (NULL == (dx = uiutil.X2DX()))
         return ERR_POINTER;
 
-
     if(m_bLinked){
         m_PlayerOneFW.getWheelMoveDirection(bBidirectional);
         dx->setChecked("radioButton", bBidirectional?1:0);
@@ -287,11 +284,6 @@ int X2FilterWheel::doPlayerOneFWFeatureConfig()
             m_PlayerOneFW.setWheelMoveDirection(bBidirectional);
             nErr |= m_pIniUtil->writeInt(PARENT_KEY, WHEEL_DIR, bBidirectional?1:0);
         }
-
-        // save the values to persistent storage
-        //nErr |= m_pIniUtil->writeInt(PARENT_KEY, CHILD_KEY_HOME_ON_UNPARK, m_bHomeOnUnpark);
-        //nErr |= m_pIniUtil->writeInt(PARENT_KEY, CHILD_KEY_LOG_RAIN_STATUS, m_bLogRainStatus);
-
     }
     return nErr;
 }

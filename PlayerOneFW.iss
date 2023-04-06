@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Pegasus Astro Indigo filter wheel X2 Plugin"
-#define MyAppVersion "1.02"
+#define MyAppVersion "1.03"
 #define MyAppPublisher "RTI-Zone"
 #define MyAppURL "https://rti-zone.org"
 
